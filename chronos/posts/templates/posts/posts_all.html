@@ -2,17 +2,17 @@
 
 {% block content %}
 
-<div class="row d-flex justify-content-center" style="margin-top: 50px">
+<div class="row d-flex justify-content-center" style="margin-top: 30px">
     <div class="col-sm-6">
         {% for post in posts %}
-            <div class="card text-left" style="margin-bottom: 40px">
+            <div class="card text-left" style="margin-bottom: 30px">
                 <div class="card-header" style="background-color: #FFF1C6">
                     By {{ post.author|upper }}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
-                    <a href="{% url 'posts:show_post' post.id %}" style="margin-top: 10px" class="btn btn-secondary">Read
-                        Article</a>
+                    <a href="{% url 'posts:show_post' post.id %}" style="margin-top: 10px" class="btn btn-secondary">
+                        Read Article</a>
                 </div>
                 <div class="card-footer text-muted">
                     Published {{ post.created_on|timesince }} ago

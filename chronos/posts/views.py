@@ -27,7 +27,7 @@ def show_post(request, pk):
             new_comment.post = post
             new_comment.author = request.user
             new_comment.save()
-            return redirect('posts:show_posts', pk)
+            return redirect('posts:show_post', pk=pk)
     else:
         form = PostCommentForm()
 

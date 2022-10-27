@@ -1,7 +1,11 @@
 from ckeditor.fields import RichTextField
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import CASCADE
+
+
+UserModel = get_user_model()
 
 
 class Post(models.Model):
@@ -39,7 +43,7 @@ class PostComment(models.Model):
     COMMENT_MAX_LEN = 300
 
     author = models.ForeignKey(
-        User,
+        UserModel,
         on_delete=CASCADE,
     )
 
