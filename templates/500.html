@@ -1,0 +1,20 @@
+{% extends 'web/base.html' %}
+
+{% block content %}
+    <div class="row d-flex justify-content-center" style="margin-top: 50px">
+        <div class="col-md-5">
+            <h1>500</h1>
+            <h3>Internal Server Error</h3>
+            <p>Oops, something went wrong. Try to refresh this page or feel free to contact us if the problem
+                persists</p>
+            <p>Maybe some of the following links can help you?</p>
+
+            <button type="button" onclick="location.href='{% url 'show homepage' %}'"
+                    class="btn btn-secondary flex-grow-1">Home
+            </button>
+            <button type="button" onclick="location.href='{% url 'show dashboard' %}'"
+                    class="btn btn-secondary flex-grow-1">All Watches
+            </button>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'web/base.html' %}
+
+{% block content %}
+    <div class="row d-flex justify-content-center" style="margin-top: 50px">
+        <div class="col-md-8">
+            <h5>{{ post.title }}</h5>
+            <p>By {{ post.author|upper }} - {{ post.created_on|date }}</p>
+            <div class="lh-lg">
+                <p class="text-justify">{{ post.content|safe }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-8" style="margin-top: 25px; margin-bottom: 50px">
+            <h6>Comments ({{ comment_count }})</h6>
+
+            {% if not comments %}
+                <h6>There are no comments yet.</h6>
+            {% else %}
+                {% for comment in comments %}
+                    <div class="card" style="margin-top: 10px">
+                        <div class="card-header" style="background-color: #FFF1C6">
+                            <span class="badge bg-warning" style="margin-right: 10px">{{ forloop.counter }}</span>
+                            <small><b>{{ comment.author }}</b> said {{ comment.created_on|timesince }} ago</small>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p style="font-size: small">{{ comment.body }}</p>
+                            </blockquote>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+                <form method="POST" style="margin-top: 40px;">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" class="btn btn-warning" style="margin-top: 10px">Submit</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'web/base.html' %}
+
+{% block content %}
+    <div class="row d-flex justify-content-center" style="margin-top: 50px">
+        <div class="col-md-5">
+            <h1>404</h1>
+            <h3>Page not found</h3>
+            <p>We are sorry, the page you requested could not be found.</p>
+            <p>Maybe some of the following links can help you?</p>
+
+            <button type="button" onclick="location.href='{% url 'show homepage' %}'"
+                    class="btn btn-secondary flex-grow-1">Home
+            </button>
+            <button type="button" onclick="location.href='{% url 'show dashboard' %}'"
+                    class="btn btn-secondary flex-grow-1">All Watches
+            </button>
+        </div>
+    </div>
+{% endblock %}

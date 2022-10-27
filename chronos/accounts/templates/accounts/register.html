@@ -1,0 +1,63 @@
+{% extends 'web/base.html' %}
+
+{% block content %}
+    <div class="container" style="margin-top: 50px">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6">
+                <h3>Register</h3>
+                <form method="POST" action="{% url 'accounts:register' %}">
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <div id="form_errors">
+                                {% for key, value in form.errors.items %}
+                                    <strong>{{ value }}</strong>
+                                {% endfor %}
+                            </div>
+                            <strong>{{ message|striptags }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+
+                    <div class="row" style="margin-top: 30px">
+                        <div class="col">
+                            <label class="mb-1">First Name*</label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="col">
+                            <label class="mb-1">Last Name*</label>
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px">
+                        <div class="col">
+                            <label class="mb-1">Username*</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="col">
+                            <label class="mb-1">Email*</label>
+                            {{ form.email }}
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px">
+                        <div class="col">
+                            <label class="mb-1">Password*</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="col">
+                            <label class="mb-1">Confirm Password*</label>
+                            {{ form.password2 }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-warning" style="margin-top: 30px">Register</button>
+                </form>
+
+                <h6 style="margin-top: 30px">If you already have an account,
+                    <a href="{% url 'accounts:login' %}">login</a> instead.</h6>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

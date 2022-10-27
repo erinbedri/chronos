@@ -1,0 +1,90 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+    <div class="container-sm" style="margin-top: 30px">
+        <div class="row">
+            <div class="col-8 text-center">
+                <figure class="figure border">
+                    {% if watch.image %}
+                        <img src="{{ watch.image.url }}" class="figure-img img-fluid"
+                             style="object-fit: cover; height: 500px" alt="{{ watch.brand }}">
+                    {% else %}
+                        <img src="/media/watch/default_watch.png" class="figure-img img-fluid"
+                             style="object-fit: cover; height: 500px" alt="{{ watch.brand }}">
+                    {% endif %}
+                </figure>
+            </div>
+
+            <div class="col-4">
+                <h5><span class="badge bg-warning"
+                          style="margin-bottom: 10px">Total Likes: {{ like_count }}</span></h5>
+                <p><b>Brand: </b>{{ watch.brand }}</p>
+                <p><b>Model: </b>{{ watch.model }}</p>
+                <p><b>Reference Number: </b>{{ watch.reference_number }}</p>
+                <p><b>Year: </b>{{ watch.year }}</p>
+                <p><b>Style: </b>{{ watch.style }}</p>
+                <p><b>Condition: </b>{{ watch.condition }}</p>
+                <p><b>Description: </b>{{ watch.description }}</p>
+
+                <div>
+                    {% if request.user.is_authenticated %}
+                        <form method="POST" action="{% url 'watches:like_watch' watch.id %}">
+                            {% csrf_token %}
+                            {% if not liked %}
+                                <button type="submit" name="watch_id" value="watch.id" class="btn btn-warning">Like
+                                </button>
+                            {% else %}
+                                <button type="submit" name="watch_id" value="watch.id" class="btn btn-danger">Dislike
+                                </button>
+                            {% endif %}
+                        </form>
+                    {% endif %}
+
+                    <div style="margin-top: 15px">
+                        {% if request.user.is_authenticated and request.user == watch.owner %}
+                            <a href="{% url 'watches:edit_watch' watch.id %}"
+                               class="btn btn-warning"
+                               style="position: relative;">Edit</a>
+                            <a href="{% url 'watches:delete_watch' watch.id %}"
+                               class="btn btn-outline-danger"
+                               style="position: relative;">Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-sm" style="margin-top: 50px; margin-bottom: 50px">
+        <h6>Comments ({{ comment_count }})</h6>
+
+        {% if not comments %}
+            <h6>There are no comments yet.</h6>
+        {% else %}
+            {% for comment in comments %}
+                <div class="card" style="margin-top: 10px">
+                    <div class="card-header" style="background-color: #FFF1C6">
+                        <span class="badge bg-warning" style="margin-right: 10px">{{ forloop.counter }}</span>
+                        <small><b>{{ comment.author }}</b> said {{ comment.created_on|timesince }} ago</small>
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p style="font-size: small">{{ comment.body }}</p>
+                        </blockquote>
+
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if request.user.is_authenticated %}
+            <form method="POST" style="margin-top: 40px;">
+                {% csrf_token %}
+                {{ comment_form }}
+                <button type="submit" class="btn btn-warning" style="margin-top: 10px">Submit</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
