@@ -102,7 +102,7 @@ def edit_account(request):
         if form.is_valid():
             form.save()
             messages.success(request, PROFILE_EDIT_SUCCESS_MESSAGE)
-            return redirect('accounts:show')
+            return redirect('accounts:show_account')
         else:
             messages.error(request, form.errors)
     else:
