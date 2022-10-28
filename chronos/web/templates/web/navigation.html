@@ -36,19 +36,19 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'accounts:show' %}">Profile</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'accounts:show_account' %}">Profile</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'accounts:logout' %}">Logout</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'accounts:logout_account' %}">Logout</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'accounts:login' %}">Login</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'accounts:login_account' %}">Login</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'accounts:register' %}">Register</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'accounts:register_account' %}">Register</a>
                     </li>
                 {% endif %}
             </ul>
