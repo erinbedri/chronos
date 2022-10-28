@@ -22,11 +22,11 @@
                           style="margin-bottom: 10px">Total Likes: {{ like_count }}</span></h5>
                 <p><b>Brand: </b>{{ watch.brand }}</p>
                 <p><b>Model: </b>{{ watch.model }}</p>
-                <p><b>Reference Number: </b>{{ watch.reference_number }}</p>
-                <p><b>Year: </b>{{ watch.year }}</p>
+                <p><b>Reference Number: </b>{% if watch.reference_number %}{{ watch.reference_number }}{% endif %}</p>
+                <p><b>Year: </b>{% if watch.year %}{{ watch.year }}{% endif %}</p>
                 <p><b>Style: </b>{{ watch.style }}</p>
-                <p><b>Condition: </b>{{ watch.condition }}</p>
-                <p><b>Description: </b>{{ watch.description }}</p>
+                <p><b>Condition: </b>{% if watch.condition %}{{ watch.condition }}{% endif %}</p>
+                <p><b>Description: </b>{% if watch.description %}{{ watch.description }}{% endif %}</p>
 
                 <div>
                     {% if request.user.is_authenticated %}

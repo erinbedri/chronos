@@ -27,11 +27,11 @@
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ watch.brand }}</td>
                         <td>{{ watch.model }}</td>
-                        <td>{{ watch.reference_number }}</td>
-                        <td>{{ watch.year }}</td>
+                        <td>{% if watch.reference_number %}{{ watch.reference_number }}{% endif %}</td>
+                        <td>{% if watch.year %}{{ watch.year }}{% endif %}</td>
                         <td>{{ watch.style }}</td>
                         <td>{{ watch.like_count }}</td>
-                        <td>EUR {{ watch.price_paid|floatformat:2|intcomma }}</td>
+                        <td>{% if watch.price_paid %}EUR {{ watch.price_paid|floatformat:2|intcomma }}{% endif %}</td>
                     </tr>
                 {% endfor %}
 

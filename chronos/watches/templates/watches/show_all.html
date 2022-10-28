@@ -65,9 +65,9 @@
                                         </div>
                                     {% endif %}
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ watch.brand }} {{ watch.model }}
-                                            ({{ watch.year }})</h5>
-                                        <p class="card-text">{{ watch.condition|truncatechars:50 }}...</p>
+                                        <h5 class="card-title small">
+                                            {{ watch.brand }} {{ watch.model }} {% if watch.year %}({{ watch.year }}) {% endif %}</h5>
+                                        <p class="card-text small">{{ watch.condition|truncatechars:50 }}...</p>
 
                                         <a href="{% url 'watches:show_watch' watch.id %}"
                                            class="btn btn-secondary"
@@ -138,6 +138,5 @@
             </div>
         </div>
     </div>
-
 
 {% endblock %}
