@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from chronos.accounts.forms import RegisterUserForm, CustomAuthenticationForm, EditProfileForm, DeleteProfileForm
+from chronos.accounts.forms import RegisterUserForm, CustomAuthenticationForm, EditUserForm, DeleteUserForm
 from chronos.watches.models import Watch
 
 REGISTRATION_SUCCESS_MESSAGE = 'Registration successful!'
@@ -98,7 +98,7 @@ def show_account(request):
 @login_required
 def edit_account(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
+        form = EditUserForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, PROFILE_EDIT_SUCCESS_MESSAGE)
@@ -106,7 +106,7 @@ def edit_account(request):
         else:
             messages.error(request, form.errors)
     else:
-        form = EditProfileForm(instance=request.user)
+        form = EditUserForm(instance=request.user)
 
     context = {
         'form': form
@@ -118,13 +118,13 @@ def edit_account(request):
 @login_required
 def delete_account(request):
     if request.method == 'POST':
-        form = DeleteProfileForm(request.POST, instance=request.user)
+        form = DeleteUserForm(request.POST, instance=request.user)
         if form.is_valid():
             request.user.delete()
             messages.success(request, PROFILE_DELETE_SUCCESS_MESSAGE)
             return redirect('web:show_homepage')
     else:
-        form = DeleteProfileForm(instance=request.user)
+        form = DeleteUserForm(instance=request.user)
 
     context = {
         'form': form

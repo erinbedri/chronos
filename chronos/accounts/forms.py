@@ -1,7 +1,11 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+
+
+UserModel = get_user_model()
 
 
 class RegisterUserForm(UserCreationForm):
@@ -38,7 +42,7 @@ class RegisterUserForm(UserCreationForm):
                                                                   }))
 
     class Meta:
-        model = User
+        model = UserModel
         fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
 
     def save(self, commit=True):
@@ -72,7 +76,7 @@ class CustomAuthenticationForm(AuthenticationForm):
     remember_me = forms.BooleanField(required=False)
 
 
-class EditProfileForm(forms.ModelForm):
+class EditUserForm(forms.ModelForm):
     first_name = forms.CharField(required=True,
                                  max_length=30,
                                  widget=forms.TextInput(attrs={'class': 'form-control',
@@ -94,7 +98,7 @@ class EditProfileForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'username', 'email')
 
 
-class DeleteProfileForm(forms.ModelForm):
+class DeleteUserForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = UserModel
         fields = ()

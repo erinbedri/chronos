@@ -11,11 +11,11 @@ from django.urls import reverse
 from chronos.watches.forms import CreateWatchForm, WatchCommentForm, EditWatchForm, DeleteWatchForm
 from chronos.watches.models import Watch, WatchComment
 
-WATCH_ADD_SUCCESS_MESSAGE = 'The watches was successfully added!'
+WATCH_ADD_SUCCESS_MESSAGE = 'The watch was successfully added!'
 
-WATCH_EDIT_SUCCESS_MESSAGE = 'The watches was successfully updated!'
+WATCH_EDIT_SUCCESS_MESSAGE = 'The watch was successfully updated!'
 
-WATCH_DELETE_SUCCESS_MESSAGE = 'The watches was successfully deleted!'
+WATCH_DELETE_SUCCESS_MESSAGE = 'The watch was successfully deleted!'
 
 WATCHES_PER_PAGE = 8
 
